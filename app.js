@@ -51,5 +51,7 @@ auth.onAuthStateChanged((user) => {
     console.log("Usuario no autenticado");
     document.getElementById("signInBtn").style.display = "block";
     document.getElementById("signOutBtn").style.display = "none";
+	document.getElementById("signInBtn").addEventListener("click", signInWithGoogle);
+
   }
 });
