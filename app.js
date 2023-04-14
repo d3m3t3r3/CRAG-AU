@@ -52,3 +52,31 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("signOutBtn").style.display = "none";
   }
 });
+const searchButton = document.getElementById('search-button'); // Asegúrate de que el botón tenga un id='search-button' en tu archivo HTML
+const plateInput = document.getElementById('plate-input'); // Asegúrate de que el campo de entrada tenga un id='plate-input' en tu archivo HTML
+
+searchButton.addEventListener('click', () => {
+  const plate = plateInput.value.trim(); // Obtiene el valor ingresado en el campo de entrada de la placa y elimina los espacios en blanco
+
+  if (plate) {
+    // Cambia la referencia según la estructura de tu base de datos en Firebase
+    const plateRef = firebase.database().ref('motos/' + plate);
+
+    plateRef.once('value', (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const estado = data.estado; // Asume que el campo 'estado' está en la base de datos
+        console.log('Estado de la moto:', estado);
+        // Muestra el estado de la moto en la página o realiza otras acciones
+      } else {
+        console.log('La placa no se encuentra en la base de datos');
+        // Muestra un mensaje de error en la página o realiza otras acciones
+      }
+    }).catch((error) => {
+      console.error('Error al buscar la placa:', error);
+    });
+  } else {
+    console.log('Por favor, ingrese una placa');
+    // Muestra un mensaje de error en la página o realiza otras acciones
+  }
+});
