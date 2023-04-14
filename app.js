@@ -20,6 +20,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
 // Función para iniciar sesión con Google
 function signInWithGoogle() {
   auth.signInWithPopup(provider).then((result) => {
+	console.log("Función signInWithGoogle llamada");
     console.log("Inició sesión correctamente:", result.user.displayName);
     document.getElementById("signInBtn").style.display = "none";
     document.getElementById("signOutBtn").style.display = "block";
