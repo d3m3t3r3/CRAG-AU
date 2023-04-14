@@ -20,7 +20,6 @@ const provider = new firebase.auth.GoogleAuthProvider();
 // Función para iniciar sesión con Google
 function signInWithGoogle() {
   auth.signInWithPopup(provider).then((result) => {
-    console.log("Función signInWithGoogle llamada");
     console.log("Inició sesión correctamente:", result.user.displayName);
     document.getElementById("signInBtn").style.display = "none";
     document.getElementById("signOutBtn").style.display = "block";
@@ -31,15 +30,24 @@ function signInWithGoogle() {
 
 // Función para cerrar sesión
 function signOut() {
-  // ...
+  auth.signOut().then(() => {
+    console.log("Sesión cerrada correctamente");
+    document.getElementById("signInBtn").style.display = "block";
+    document.getElementById("signOutBtn").style.display = "none";
+  }).catch((error) => {
+    console.error("Error al cerrar sesión:", error.message);
+  });
 }
 
 // Observador de estado de autenticación
 auth.onAuthStateChanged((user) => {
-  // ...
-});
-
-// Vincula el evento 'click' al botón de inicio de sesión cuando el contenido de la página haya cargado
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("signInBtn").addEventListener("click", signInWithGoogle);
+  if (user) {
+    console.log("Usuario autenticado:", user.displayName);
+    document.getElementById("signInBtn").style.display = "none";
+    document.getElementById("signOutBtn").style.display = "block";
+  } else {
+    console.log("Usuario no autenticado");
+    document.getElementById("signInBtn").style.display = "block";
+    document.getElementById("signOutBtn").style.display = "none";
+  }
 });
