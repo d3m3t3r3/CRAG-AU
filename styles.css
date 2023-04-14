@@ -12,3 +12,13 @@
     font-size: 24px;
   }
 }
+input, button {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Si quieres que el botón no ocupe todo el ancho */
+button {
+  width: auto;
+}
