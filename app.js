@@ -39,5 +39,7 @@ auth.onAuthStateChanged((user) => {
   // ...
 });
 
-// Vincula el evento 'click' al botón de inicio de sesión
-document.getElementById("signInBtn").addEventListener("click", signInWithGoogle);
+// Vincula el evento 'click' al botón de inicio de sesión cuando el contenido de la página haya cargado
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById("signInBtn").addEventListener("click", signInWithGoogle);
+});
