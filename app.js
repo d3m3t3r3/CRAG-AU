@@ -22,6 +22,7 @@ function signInWithGoogle() {
   auth.signInWithPopup(provider).then((result) => {
     console.log("Función signInWithGoogle llamada");
     console.log("Inició sesión correctamente:", result.user.displayName);
+	document.getElementById("signInBtn").addEventListener("click", signInWithGoogle);
     document.getElementById("signInBtn").style.display = "none";
     document.getElementById("signOutBtn").style.display = "block";
   }).catch((error) => {
