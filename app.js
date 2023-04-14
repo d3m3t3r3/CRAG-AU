@@ -41,4 +41,13 @@ function signOut() {
 
 // Observador de estado de autenticación
 auth.onAuthStateChanged((user) => {
-  if (user)
+  if (user) {
+    console.log("Usuario autenticado:", user.displayName);
+    document.getElementById("signInBtn").style.display = "none";
+    document.getElementById("signOutBtn").style.display = "block";
+  } else {
+    console.log("Usuario no autenticado");
+    document.getElementById("signInBtn").style.display = "block";
+    document.getElementById("signOutBtn").style.display = "none";
+  }
+});
